@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalvi - Sriram's Blog</title>
+
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <h3>EDU</h3>
+    </div>
+    <div class="menu-toggle" id="mobile-menu">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <h1>Welcome to Sriram's Blog</h1>
+    
+    <section id="posts">
+      <% posts.forEach(post => { %>
+        <div class="post">
+          <h2><%= post.title %></h2>
+          <p><%= post.description %></p>
+  
+            <a href="<%= post.filePath %>" download>Download PDF</a>
+           
+
+    
+          <div class="comments">
+            <h3>Comments:</h3>
+            <% if (post.comments.length > 0) { %>
+              <ul>
+                <% post.comments.forEach(comment => { %>
+                  <li>
+                    <strong><%= comment.username %>:</strong>
+                    <p><%= comment.content %></p>
+                    <em><%= comment.date.toDateString() %></em>
+                  </li>
+                <% }); %>
+              </ul>
+            <% } else { %>
+              <p>No comments yet. Be the first to comment!</p>
+            <% } %>
+          </div>
+    
+          <form action="/comment/<%= post._id %>" method="POST">
+            <input type="text" name="username" placeholder="Your name" required>
+            <textarea name="content" placeholder="Your comment" required></textarea>
+            <button type="submit">Submit Comment</button>
+          </form>
+        </div>
+      <% }); %>
+    </section>
+    
+    
+    
+    <button id="prouser" class="btn">Upload Post for Edu</button>
+    
+    <div class="protect" id="protect">
+      <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="Title" required>
+        <textarea name="description" placeholder="Description" minlength="20" required></textarea>
+        <input type="file" name="pdf" required>
+        <button type="submit" class="btn">Upload Post</button>
+      </form>
+    </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ''
+  </main>
+  
+  <footer>
+    &copy; 2024 Sriram
+  </footer>
+
+ 
+</body>
+</html>
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+}
+
+nav {
+  background-color: #232323;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+nav .logo h3 {
+  color: #fff;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-left: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #f4f4f4;
+}
+
+/* Responsive Menu */
+.menu-toggle {
+  display: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #232323;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  nav ul li {
+    margin: 10px 0;
+  }
+}
+
+/* Main Content */
+main {
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+#posts .post {
+  background: white;
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+#posts .post h2 {
+  margin-bottom: 10px;
+}
+
+#posts .post p {
+  margin-bottom: 10px;
+}
+
+#posts .post .btn {
+  background-color: #232323;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+#posts .post .btn:hover {
+  background-color: #555;
+}
+
+/* Form Section */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+input, textarea {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button, .btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #232323;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+  background-color: #555;
+}
+
+footer {
+  background-color: #232323;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.protect {
+  display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .post {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .post {
+    padding: 10px;
+  }
+
+  input, textarea {
+    width: 100%;
+  }
+}
+.comments {
+  margin-top: 20px;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.comments ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comments li {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.comments strong {
+  display: block;
+  font-size: 1.1em;
+}
+.comments em {
+  font-size: 0.9em;
+  color: #777;
+}
+</style>
+<script>
+
+const menuToggle = document.getElementById('mobile-menu');
+const navLinks = document.getElementById('nav-links');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
+
+
+const prouser = document.getElementById("prouser");
+const protect = document.getElementById('protect');
+const password = "1324@";
+
+prouser.onclick = function() {
+  const inp = prompt("Enter the password:");
+  if (inp === password) {
+    protect.style.display = "block";
+  } else {
+    alert('Incorrect password!');
+    protect.style.display = "none";
+  }
+};
+
+</script>

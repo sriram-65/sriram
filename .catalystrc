@@ -1,0 +1,30 @@
+{
+  "defaults": {
+    "project": 1,
+    "env": 1
+  },
+  "actives": {
+    "project": 1,
+    "env": 1
+  },
+  "projects": [
+    {
+      "idx": 1,
+      "id": "7815000000020045",
+      "name": "kalvi",
+      "domain": {
+        "id": "50022564227",
+        "name": "kalvi-60030917375.development"
+      },
+      "timezone": "Asia/Kolkata",
+      "env": [
+        {
+          "idx": 1,
+          "id": "60030917375",
+          "name": "Development",
+          "type": 3
+        }
+      ]
+    }
+  ]
+}
